@@ -1,46 +1,38 @@
 #include<iostream>
 using namespace std;
-class Students
+class Student
 {
 private:
-	int num[5][2];//其中一个用来存储学号，一个用来存储成绩：
-	int maxstudentid;
+	int id;
+	int score;
+
 public:
-	void max()
+	Student(int id, int score)
 	{
-		for (int i = 0;i < 5;i++)
-		{
-			for (int j = 0;j < 5;j++)
-			{
-				if (num[j][1] > num[i][1])
-				{
-					maxstudentid = num[j][0];
-				}
-			}
-
-		}
-		cout << "成绩最高者的学号为：" << maxstudentid << endl;
-
-	}
-	Students(int num[5][2])
-	{
-		for (int i = 0;i < 5;i++)
-		{
-			this->num[i][0] = num[i][0];
-			this->num[i][1] = num[i][1];
-		}
-		this->maxstudentid = num[0][0];
+		this->id = id, this->score = score;
 	}
 };
-int main()
+int max(Student* s)
 {
-	int num[5][2];
+	int temp = 0;
 	for (int i = 0;i < 5;i++)
 	{
-		cin >> num[i][0] >> num[i][1];
+		if (s[i].score > temp)
+			temp = s[i].score;
 	}
-	Students s1(num);
-	s1.max();
-	return 0;
 
+	return temp;
+}
+
+int main()
+{
+	Student s[5];
+	int id0, score0;
+	for (int i = 0;i < 5;i++)
+	{
+		cin >> id0 >> score0;
+		s[i] = Student(id0, score0);
+	}
+
+	cout << "最高成绩的学生ID为：" << max(s) << endl;
 }
